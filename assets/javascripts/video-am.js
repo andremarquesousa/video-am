@@ -41,13 +41,18 @@
                 });
             }
             if (options.volume) {
-                var volume = $('<span class="volume-am"><input type="range" max="100" min="0" /></span>');
+                var volume = $('<span class="volume-am"><input type="range" max="100" min="0" /></span>'),
+                    input = $('input', volume),
+                    value = localStorage.getItem('volume');
+
                 volume.appendTo(controls);
+                video.volume = value;
+                input.val(value * 100);
 
-                video.volume = Math.abs($('input', volume).val() / 100);
-
-                $('input', volume).on('change', function() {
-                    video.volume = Math.abs($(this).val() / 100);
+                input.on('change', function() {
+                    value = Math.abs($(this).val() / 100);
+                    video.volume = value;
+                    localStorage.setItem('volume', value);
                 });
             }
             if (options.autoplay) {
