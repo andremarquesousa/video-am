@@ -6,6 +6,7 @@
             options = {
                 playPause: true,
                 overlay: true,
+                poster: true,
                 time: true,
                 volume: true,
                 autoplay: false,
@@ -56,9 +57,12 @@
             if (options.overlay) {
                 overlay();
             }
+            if (options.poster) {
+                poster();
+            }
             if (options.playPause) {
                 playPause();
-            };
+            }
             if (options.time) {
                 time();
             }
@@ -96,6 +100,14 @@
             layer.appendTo($this);
         }
 
+        var poster = function() {
+            var imageUrl = $(video).attr('poster'),
+                image = $('<span class="poster-am"></span>').css('backgroundImage', 'url("' + imageUrl + '")');
+
+            image.appendTo($this);
+            $(video).removeAttr('poster');
+        }
+
         var playPause = function() {
             var button = $('<button type="button" class="play-pause-am">');
 
@@ -123,12 +135,13 @@
             $('.current-time-am', time).text('00:00');
             input.val(Math.floor(video.currentTime));
 
+            input.on('input', function() {
+                video.currentTime = $(this).val();
+            });
+
             $(video).on('timeupdate',function(e){
                 $('.current-time-am', time).text(formatTime(video.currentTime));
                 input.val(Math.floor(video.currentTime));
-            });
-            input.on('input', function() {
-                video.currentTime = $(this).val();
             });
         }
 
@@ -164,7 +177,13 @@
             button.appendTo(controls);
         }
 
-        init();
+        if (video.readyState === 4) {
+            init();
+        } else {
+            video.onloadeddata = function() {
+                init();
+            };
+        }
 
         return this
     };
