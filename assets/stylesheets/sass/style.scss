@@ -108,6 +108,83 @@ button {
                 border-right: solid 6px #fff;
             }
         }
+        .time-am {
+            width: 400px;
+            padding: 0 40px;
+            position: relative;
+
+            .current-time-am
+            , .total-time-am {
+                color: #fff;
+                font-size: 14px;
+                position: absolute;
+                top: 0;
+            }
+            .current-time-am {
+                left: 0;
+            }
+            .total-time-am {
+                right: 0;
+            }
+            input[type="range"] {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 10px;
+
+                &::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                }
+                &:focus {
+                  outline: none;
+                }
+                &::-ms-track {
+                  width: 100%;
+                  background: transparent;
+                  border-color: transparent;
+                  color: transparent;
+                }
+                &::-webkit-slider-thumb {
+                    background: #ffffff;
+                    height: 12px;
+                    width: 5px;
+                    margin-top: -2.5px;
+                }
+                &::-moz-range-thumb {
+                    background: #ffffff;
+                    height: 12px;
+                    width: 5px;
+                    margin-top: -2.5px;
+                }
+                &::-ms-thumb {
+                    background: #ffffff;
+                    height: 12px;
+                    width: 5px;
+                    margin-top: -2.5px;
+                }
+                &::-webkit-slider-runnable-track {
+                    background: rgba(255, 255, 255, 0.4);
+                    width: 100%;
+                    height: 5px;
+                }
+                &::-moz-range-track {
+                    background: rgba(255, 255, 255, 0.4);
+                    width: 100%;
+                    height: 5px;
+                }
+                &::-ms-track {
+                    background: rgba(255, 255, 255, 0.4);
+                    width: 100%;
+                    height: 5px;
+                }
+                &::-ms-fill-lower {
+                    background: #2a6495;
+                }
+                &::-ms-fill-upper {
+                    background: rgba(255, 255, 255, 0.4);
+                    border-radius: 2.6px;
+                }
+            }
+        }
         .volume-am {
             width: 40px;
             height: 40px;

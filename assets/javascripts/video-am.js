@@ -60,12 +60,7 @@
                 playPause();
             };
             if (options.time) {
-                var time = $('<span class="time-am"><input type="range" /></span>');
-                time.appendTo(controls);
-
-                $(video).on('timeupdate',function(){
-                  console.log(Math.ceil(video.currentTime));
-                });
+                time();
             }
             if (options.volume) {
                 volume();
@@ -108,6 +103,33 @@
                 verifyAction();
             });
             button.appendTo(controls);
+        }
+
+        var time = function() {
+            var time = $('<div class="time-am"><span class="current-time-am"></span><input type="range" max="' + Math.floor(video.duration) + '" min="0" /><span class="total-time-am"></span></div>'),
+                input = $('input', time),
+                currentTime;
+
+            time.appendTo(controls);
+
+            function formatTime(seconds) {
+                minutes = Math.floor(seconds / 60);
+                minutes = (minutes >= 10) ? minutes : "0" + minutes;
+                seconds = Math.floor(seconds % 60);
+                seconds = (seconds >= 10) ? seconds : "0" + seconds;
+                return minutes + ":" + seconds;
+            }
+            $('.total-time-am', time).text(formatTime(video.duration));
+            $('.current-time-am', time).text('00:00');
+            input.val(Math.floor(video.currentTime));
+
+            $(video).on('timeupdate',function(e){
+                $('.current-time-am', time).text(formatTime(video.currentTime));
+                input.val(Math.floor(video.currentTime));
+            });
+            input.on('input', function() {
+                video.currentTime = $(this).val();
+            });
         }
 
         var volume = function() {
