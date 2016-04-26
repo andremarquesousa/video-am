@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.video-am').videoAm({
-        autoplay: true,
-        time: false
+        time: false,
+        fullscreen: true,
     });
 });

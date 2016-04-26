@@ -2,11 +2,14 @@
     $.fn.videoAm = function(newOptions) {
         var $this = $(this),
             video = $('video', $this).get(0),
+            controls,
             options = {
                 playPause: true,
+                overlay: true,
                 time: true,
                 volume: true,
-                autoplay: false
+                autoplay: false,
+                fullscreen: false
             };
 
         if (newOptions) {
@@ -14,56 +17,6 @@
         }
 
         video.controls = false;
-
-        var init = function() {
-            var controls = $('<div class="controls-am">');
-
-            if (options.playPause) {
-                var playPause = $('<button type="button" class="play-pause-am">');
-
-                playPause.on('click', function(event) {
-                    if (video.paused) {
-                        actions.play();
-                    } else if ($this.hasClass('playing')) {
-                        actions.pause();
-                    } else {
-                        actions.start();
-                    }
-                });
-                playPause.appendTo(controls);
-            };
-            if (options.time) {
-                var time = $('<span class="time-am"><input type="range" /></span>');
-                time.appendTo(controls);
-
-                $(video).on('timeupdate',function(){
-                  console.log(Math.ceil(video.currentTime));
-                });
-            }
-            if (options.volume) {
-                var volume = $('<span class="volume-am"><input type="range" max="100" min="0" /></span>'),
-                    input = $('input', volume),
-                    value = localStorage.getItem('volume');
-
-                volume.appendTo(controls);
-                video.volume = value;
-                input.val(value * 100);
-
-                input.on('change', function() {
-                    value = Math.abs($(this).val() / 100);
-                    video.volume = value;
-                    localStorage.setItem('volume', value);
-                });
-            }
-            if (options.autoplay) {
-                actions.start();
-            }
-            controls.appendTo($this);
-
-            $(video).on('ended',function(){
-              actions.stop();
-            });
-        }
 
         var actions = {
             start: function() {
@@ -85,6 +38,108 @@
                     .removeClass('playing')
                     .addClass('paused');
             }
+        }
+
+        var verifyAction = function() {
+            if (video.paused) {
+                actions.play();
+            } else if ($this.hasClass('playing')) {
+                actions.pause();
+            } else {
+                actions.start();
+            }   
+        }
+
+        var init = function() {
+            controls = $('<div class="controls-am">');
+
+            if (options.overlay) {
+                overlay();
+            }
+            if (options.playPause) {
+                playPause();
+            };
+            if (options.time) {
+                var time = $('<span class="time-am"><input type="range" /></span>');
+                time.appendTo(controls);
+
+                $(video).on('timeupdate',function(){
+                  console.log(Math.ceil(video.currentTime));
+                });
+            }
+            if (options.volume) {
+                volume();
+            }
+            if (options.fullscreen) {
+                fullscreen();
+            }
+            if (options.autoplay) {
+                actions.start();
+            }
+
+            $(video).on('ended',function(){
+              actions.stop();
+            });
+
+            $(video).on('click', function(e) {
+                verifyAction();
+            });
+
+            controls.appendTo($this);
+        }
+
+        var overlay = function() {
+            var layer = $('<span class="overlay-am">');
+
+            layer.on('click', function(e) {
+                if ($this.hasClass('paused')) {
+                    actions.play();
+                } else {
+                    actions.start();
+                }
+            });
+            layer.appendTo($this);
+        }
+
+        var playPause = function() {
+            var button = $('<button type="button" class="play-pause-am">');
+
+            button.on('click', function() {
+                verifyAction();
+            });
+            button.appendTo(controls);
+        }
+
+        var volume = function() {
+            var volume = $('<span class="volume-am"><input type="range" max="100" min="0" /></span>'),
+                input = $('input', volume),
+                value = localStorage.getItem('volume');
+
+            volume.appendTo(controls);
+            video.volume = value;
+            input.val(value * 100);
+
+            input.on('input', function() {
+                value = Math.abs($(this).val() / 100);
+                video.volume = value;
+                localStorage.setItem('volume', value);
+            });
+        }
+
+        var fullscreen = function() {
+            var button = $('<button type="button" class="fullscreen-am">');
+
+            button.on('click', function() {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                }
+            });
+
+            button.appendTo(controls);
         }
 
         init();
