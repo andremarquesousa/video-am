@@ -111,7 +111,7 @@
         }
 
         var volume = function() {
-            var volume = $('<span class="volume-am"><input type="range" max="100" min="0" /></span>'),
+            var volume = $('<span class="volume-am"><input type="range" max="100" min="0" orient="vertical" /></span>'),
                 input = $('input', volume),
                 value = localStorage.getItem('volume');
 
