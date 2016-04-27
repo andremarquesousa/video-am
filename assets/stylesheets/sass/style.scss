@@ -28,30 +28,41 @@ button {
         height: 100%;
         margin: 0;
 
-        .overlay-am {
-            z-index: 99999999999;
+        video:-webkit-full-screen {
+            z-index: 1 !important;
+        }
+        video:-moz-full-screen {
+            z-index: 1 !important;
         }
         .poster-am {
             z-index: 9999999999;
         }
-        video {
-            z-index: 1;
+        .overlay-am {
+            z-index: 9999999999;
         }
         .controls-am {
-            z-index: 999999999999;
+            z-index: 9999999999;
         }
     }
-    .overlay-am
-    , .poster-am {
+    .poster-am
+    , .overlay-am {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
     }
+    .poster-am {
+        @include background-size(cover);
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    &.playing .poster-am
+    , &.paused .poster-am {
+        visibility: hidden;
+    }
     .overlay-am {
         background: rgba(0, 0, 0, 0.6);
-        z-index: 3;
 
         &:before
         , &:after {
@@ -80,22 +91,15 @@ button {
             border-left: solid 30px #fff;
         }
     }
-    .poster-am {
-        @include background-size(cover);
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: 2;
-    }
-    &.playing .poster-am
-    , &.paused .poster-am {
-        visibility: hidden;
-    }
     video {
         display: block;
         width: 100%;
         height: 100%;
-        position: relative;
-        z-index: 1;
+
+        &::-webkit-media-controls
+        , &::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
     }
     .controls-am {
         @include transition(transform 0.6s 2s);
@@ -108,7 +112,6 @@ button {
         position: absolute;
         bottom: 0;
         left: 0;
-        z-index: 4;
         width: 100%;
         height: 40px;
 

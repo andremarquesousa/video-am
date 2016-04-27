@@ -54,11 +54,11 @@
         var init = function() {
             controls = $('<div class="controls-am">');
 
-            if (options.overlay) {
-                overlay();
-            }
             if (options.poster) {
                 poster();
+            }
+            if (options.overlay) {
+                overlay();
             }
             if (options.playPause) {
                 playPause();
@@ -209,7 +209,6 @@
                     } else if (video.webkitRequestFullscreen) {
                         video.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
                     }
-                    $this.addClass('fullscreen-am');
                 } else {
                     if (document.exitFullscreen) {
                         document.exitFullscreen();
@@ -220,9 +219,18 @@
                     } else if (document.webkitExitFullscreen) {
                         document.webkitExitFullscreen();
                     }
-                    $this.removeClass('fullscreen-am');
                 }
             });
+
+            $(video).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
+                if ($this.hasClass('fullscreen-am')) {
+                    $this.removeClass('fullscreen-am');
+                } else {
+                    $this.addClass('fullscreen-am');
+                    video.controls = false;
+                }
+            });
+
 
             button.appendTo(controls);
         }

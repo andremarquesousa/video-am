@@ -35,36 +35,53 @@ button {
   margin: 0;
 }
 /* line 31, sass/style.scss */
-.video-am.fullscreen-am .overlay-am {
-  z-index: 99999999999;
+.video-am.fullscreen-am video:-webkit-full-screen {
+  z-index: 1 !important;
 }
 /* line 34, sass/style.scss */
+.video-am.fullscreen-am video:-moz-full-screen {
+  z-index: 1 !important;
+}
+/* line 37, sass/style.scss */
 .video-am.fullscreen-am .poster-am {
   z-index: 9999999999;
 }
-/* line 37, sass/style.scss */
-.video-am.fullscreen-am video {
-  z-index: 1;
-}
 /* line 40, sass/style.scss */
-.video-am.fullscreen-am .controls-am {
-  z-index: 999999999999;
+.video-am.fullscreen-am .overlay-am {
+  z-index: 9999999999;
 }
-/* line 44, sass/style.scss */
-.video-am .overlay-am
-, .video-am .poster-am {
+/* line 43, sass/style.scss */
+.video-am.fullscreen-am .controls-am {
+  z-index: 9999999999;
+}
+/* line 47, sass/style.scss */
+.video-am .poster-am
+, .video-am .overlay-am {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
 }
-/* line 52, sass/style.scss */
+/* line 55, sass/style.scss */
+.video-am .poster-am {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* line 60, sass/style.scss */
+.video-am.playing .poster-am
+, .video-am.paused .poster-am {
+  visibility: hidden;
+}
+/* line 64, sass/style.scss */
 .video-am .overlay-am {
   background: rgba(0, 0, 0, 0.6);
-  z-index: 3;
 }
-/* line 56, sass/style.scss */
+/* line 67, sass/style.scss */
 .video-am .overlay-am:before
 , .video-am .overlay-am:after {
   content: '';
@@ -74,7 +91,7 @@ button {
   right: 0;
   margin: auto;
 }
-/* line 65, sass/style.scss */
+/* line 76, sass/style.scss */
 .video-am .overlay-am:before {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -84,7 +101,7 @@ button {
   height: 100px;
   border: solid 4px #fff;
 }
-/* line 72, sass/style.scss */
+/* line 83, sass/style.scss */
 .video-am .overlay-am:after {
   -moz-backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -100,30 +117,18 @@ button {
   border-bottom: solid 20px transparent;
   border-left: solid 30px #fff;
 }
-/* line 83, sass/style.scss */
-.video-am .poster-am {
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  -webkit-background-size: cover;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 2;
-}
-/* line 89, sass/style.scss */
-.video-am.playing .poster-am
-, .video-am.paused .poster-am {
-  visibility: hidden;
-}
-/* line 93, sass/style.scss */
+/* line 94, sass/style.scss */
 .video-am video {
   display: block;
   width: 100%;
   height: 100%;
-  position: relative;
-  z-index: 1;
 }
-/* line 100, sass/style.scss */
+/* line 99, sass/style.scss */
+.video-am video::-webkit-media-controls
+, .video-am video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+/* line 104, sass/style.scss */
 .video-am .controls-am {
   -moz-transition: -moz-transform 0.6s 2s;
   -o-transition: -o-transform 0.6s 2s;
@@ -142,17 +147,16 @@ button {
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 4;
   width: 100%;
   height: 40px;
 }
-/* line 115, sass/style.scss */
+/* line 118, sass/style.scss */
 .video-am .controls-am .play-pause-am {
   position: relative;
   height: 100%;
   width: 50px;
 }
-/* line 120, sass/style.scss */
+/* line 123, sass/style.scss */
 .video-am .controls-am .play-pause-am:before
 , .video-am .controls-am .play-pause-am:after {
   content: '';
@@ -163,7 +167,7 @@ button {
   bottom: 0;
   margin: auto;
 }
-/* line 130, sass/style.scss */
+/* line 133, sass/style.scss */
 .video-am .controls-am .play-pause-am:before {
   width: 0;
   height: 0;
@@ -171,7 +175,7 @@ button {
   border-bottom: solid 12px transparent;
   border-left: solid 15px #fff;
 }
-/* line 137, sass/style.scss */
+/* line 140, sass/style.scss */
 .video-am .controls-am .play-pause-am:after {
   visibility: hidden;
   width: 10px;
@@ -179,13 +183,13 @@ button {
   border-left: solid 6px #fff;
   border-right: solid 6px #fff;
 }
-/* line 145, sass/style.scss */
+/* line 148, sass/style.scss */
 .video-am .controls-am .time-am {
   width: 500px;
   padding: 0 40px;
   position: relative;
 }
-/* line 150, sass/style.scss */
+/* line 153, sass/style.scss */
 .video-am .controls-am .time-am .current-time-am
 , .video-am .controls-am .time-am .total-time-am {
   color: #fff;
@@ -193,84 +197,84 @@ button {
   position: absolute;
   top: 0;
 }
-/* line 157, sass/style.scss */
+/* line 160, sass/style.scss */
 .video-am .controls-am .time-am .current-time-am {
   left: 0;
 }
-/* line 160, sass/style.scss */
+/* line 163, sass/style.scss */
 .video-am .controls-am .time-am .total-time-am {
   right: 0;
 }
-/* line 163, sass/style.scss */
+/* line 166, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   height: 10px;
 }
-/* line 168, sass/style.scss */
+/* line 171, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-/* line 171, sass/style.scss */
+/* line 174, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]:focus {
   outline: none;
 }
-/* line 174, sass/style.scss */
+/* line 177, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-ms-track {
   width: 100%;
   background: transparent;
   border-color: transparent;
   color: transparent;
 }
-/* line 180, sass/style.scss */
+/* line 183, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-webkit-slider-thumb {
   background: #ffffff;
   height: 12px;
   width: 5px;
   margin-top: -2.5px;
 }
-/* line 186, sass/style.scss */
+/* line 189, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-moz-range-thumb {
   background: #ffffff;
   height: 12px;
   width: 5px;
   margin-top: -2.5px;
 }
-/* line 192, sass/style.scss */
+/* line 195, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-ms-thumb {
   background: #ffffff;
   height: 12px;
   width: 5px;
   margin-top: -2.5px;
 }
-/* line 198, sass/style.scss */
+/* line 201, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-webkit-slider-runnable-track {
   background: rgba(255, 255, 255, 0.4);
   width: 100%;
   height: 5px;
 }
-/* line 203, sass/style.scss */
+/* line 206, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-moz-range-track {
   background: rgba(255, 255, 255, 0.4);
   width: 100%;
   height: 5px;
 }
-/* line 208, sass/style.scss */
+/* line 211, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-ms-track {
   background: rgba(255, 255, 255, 0.4);
   width: 100%;
   height: 5px;
 }
-/* line 213, sass/style.scss */
+/* line 216, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-ms-fill-lower {
   background: #2a6495;
 }
-/* line 216, sass/style.scss */
+/* line 219, sass/style.scss */
 .video-am .controls-am .time-am input[type="range"]::-ms-fill-upper {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 2.6px;
 }
-/* line 222, sass/style.scss */
+/* line 225, sass/style.scss */
 .video-am .controls-am .volume-am {
   -moz-background-size: 20px auto;
   -o-background-size: 20px auto;
@@ -284,7 +288,7 @@ button {
   position: relative;
   cursor: pointer;
 }
-/* line 232, sass/style.scss */
+/* line 235, sass/style.scss */
 .video-am .controls-am .volume-am:before
 , .video-am .controls-am .volume-am:after {
   -moz-backface-visibility: hidden;
@@ -306,26 +310,26 @@ button {
   width: 25px;
   height: 4px;
 }
-/* line 249, sass/style.scss */
+/* line 252, sass/style.scss */
 .video-am .controls-am .volume-am:before {
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 252, sass/style.scss */
+/* line 255, sass/style.scss */
 .video-am .controls-am .volume-am:after {
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* line 255, sass/style.scss */
+/* line 258, sass/style.scss */
 .video-am .controls-am .volume-am.muted:before
 , .video-am .controls-am .volume-am.muted:after {
   visibility: visible;
 }
-/* line 259, sass/style.scss */
+/* line 262, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"] {
   -moz-transition: visibility 0s 1s;
   -o-transition: visibility 0s 1s;
@@ -346,22 +350,22 @@ button {
   height: 40px;
   margin-left: -45px;
 }
-/* line 272, sass/style.scss */
+/* line 275, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-/* line 275, sass/style.scss */
+/* line 278, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]:focus {
   outline: none;
 }
-/* line 278, sass/style.scss */
+/* line 281, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-ms-track {
   width: 100%;
   background: transparent;
   border-color: transparent;
   color: transparent;
 }
-/* line 284, sass/style.scss */
+/* line 287, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-webkit-slider-thumb {
   background: #ffffff;
   height: 15px;
@@ -370,7 +374,7 @@ button {
   border: solid 1px rgba(0, 0, 0, 0.6);
   border-radius: 3px;
 }
-/* line 292, sass/style.scss */
+/* line 295, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-moz-range-thumb {
   background: #ffffff;
   height: 15px;
@@ -379,7 +383,7 @@ button {
   border: solid 1px rgba(0, 0, 0, 0.6);
   border-radius: 3px;
 }
-/* line 300, sass/style.scss */
+/* line 303, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-ms-thumb {
   background: #ffffff;
   height: 15px;
@@ -388,34 +392,34 @@ button {
   border: solid 1px rgba(0, 0, 0, 0.6);
   border-radius: 3px;
 }
-/* line 308, sass/style.scss */
+/* line 311, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-webkit-slider-runnable-track {
   background: rgba(255, 255, 255, 0.4);
   width: 20px;
   height: 10px;
 }
-/* line 313, sass/style.scss */
+/* line 316, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-moz-range-track {
   background: rgba(255, 255, 255, 0.4);
   width: 20px;
   height: 10px;
 }
-/* line 318, sass/style.scss */
+/* line 321, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-ms-track {
   background: rgba(255, 255, 255, 0.4);
   width: 20px;
   height: 10px;
 }
-/* line 323, sass/style.scss */
+/* line 326, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-ms-fill-lower {
   background: #2a6495;
 }
-/* line 326, sass/style.scss */
+/* line 329, sass/style.scss */
 .video-am .controls-am .volume-am input[type="range"]::-ms-fill-upper {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 2.6px;
 }
-/* line 331, sass/style.scss */
+/* line 334, sass/style.scss */
 .video-am .controls-am .volume-am:hover input[type="range"] {
   -moz-transition: visibility 0s;
   -o-transition: visibility 0s;
@@ -423,7 +427,7 @@ button {
   transition: visibility 0s;
   visibility: visible;
 }
-/* line 336, sass/style.scss */
+/* line 339, sass/style.scss */
 .video-am .controls-am .fullscreen-am {
   -moz-background-size: 20px auto;
   -o-background-size: 20px auto;
@@ -436,7 +440,7 @@ button {
   width: 40px;
   height: 100%;
 }
-/* line 346, sass/style.scss */
+/* line 349, sass/style.scss */
 .video-am:hover .controls-am
 , .video-am .controls-am:focus {
   -moz-transition: -moz-transform 0.6s;
@@ -448,22 +452,22 @@ button {
   -webkit-transform: translateY(0);
   transform: translateY(0);
 }
-/* line 351, sass/style.scss */
+/* line 354, sass/style.scss */
 .video-am:hover:after {
   -moz-transform: scale(1.1, 1.1);
   -ms-transform: scale(1.1, 1.1);
   -webkit-transform: scale(1.1, 1.1);
   transform: scale(1.1, 1.1);
 }
-/* line 355, sass/style.scss */
+/* line 358, sass/style.scss */
 .video-am.playing .overlay-am {
   visibility: hidden;
 }
-/* line 360, sass/style.scss */
+/* line 363, sass/style.scss */
 .video-am.playing .controls-am .play-pause-am:before {
   visibility: hidden;
 }
-/* line 363, sass/style.scss */
+/* line 366, sass/style.scss */
 .video-am.playing .controls-am .play-pause-am:after {
   visibility: visible;
 }
