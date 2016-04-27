@@ -159,6 +159,40 @@
                 video.volume = value;
                 localStorage.setItem('volume', value);
             });
+            mute(volume);
+        }
+
+        var mute = function(elem) {
+            var input = $('input', elem),
+                oldValue;
+
+            if (localStorage.getItem('muted') == 'true') {
+                video.muted = true;
+            } else {
+                video.muted = false;
+            }
+
+            if (video.muted) {
+                elem.addClass('muted');
+                input.val(0);
+            }
+
+            elem.on('click', function(e) {
+                if (!$(e.target).parents('.volume-am').length) {
+                    if (video.muted) {
+                        elem.removeClass('muted');
+                        input.val(oldValue);
+                        video.muted = false;
+                        localStorage.setItem('muted', 'false');
+                    } else {
+                        elem.addClass('muted');
+                        oldValue = input.val();
+                        input.val(0);
+                        video.muted = true;
+                        localStorage.setItem('muted', 'true');
+                    }
+                }
+            });
         }
 
         var fullscreen = function() {
