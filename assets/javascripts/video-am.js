@@ -1,6 +1,7 @@
 (function($){
     $.fn.videoAm = function(newOptions) {
         var $this = $(this),
+            container = $('<div class="video-container-am">'),
             video = $('video', $this).get(0),
             controls,
             options = {
@@ -16,6 +17,8 @@
         if (newOptions) {
             $.extend( options, newOptions );
         }
+
+        $(video).appendTo(container);
 
         video.controls = false;
 
@@ -52,6 +55,7 @@
         }
 
         var init = function() {
+            container.appendTo($this);
             controls = $('<div class="controls-am">');
 
             if (options.poster) {
@@ -83,7 +87,6 @@
             $(video).on('click', function(e) {
                 verifyAction();
             });
-
             controls.appendTo($this);
         }
 
@@ -222,12 +225,18 @@
                 }
             });
 
-            $(video).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(){
+            $(video).on('webkitfullscreenchange fullscreenchange', function(){
                 if ($this.hasClass('fullscreen-am')) {
                     $this.removeClass('fullscreen-am');
                 } else {
                     $this.addClass('fullscreen-am');
-                    video.controls = false;
+                }
+            });
+            $(document).on('mozfullscreenchange', function() {
+                if ($this.hasClass('fullscreen-am')) {
+                    $this.removeClass('fullscreen-am');
+                } else {
+                    $this.addClass('fullscreen-am');
                 }
             });
 
