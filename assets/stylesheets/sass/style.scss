@@ -20,6 +20,27 @@ button {
     margin: 30px auto 0;
     overflow: hidden;
 
+    &.fullscreen-am {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+
+        .overlay-am {
+            z-index: 99999999999;
+        }
+        .poster-am {
+            z-index: 9999999999;
+        }
+        video {
+            z-index: 1;
+        }
+        .controls-am {
+            z-index: 999999999999;
+        }
+    }
     .overlay-am
     , .poster-am {
         position: absolute;
@@ -236,7 +257,7 @@ button {
                 visibility: visible;
             }
             input[type="range"] {
-                @include transition(visibility 0s 2s);
+                @include transition(visibility 0s 1s);
                 @include rotate(-90deg);
                 -webkit-appearance: none;
                 background: rgba(0, 0, 0, 0.6);
