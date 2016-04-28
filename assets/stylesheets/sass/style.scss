@@ -20,7 +20,7 @@ button {
     margin: 30px auto 0;
     overflow: hidden;
 
-    &.fullscreen-am {
+    &.fullscreen-mode-am {
         position: fixed;
         left: 0;
         top: 0;
@@ -32,6 +32,9 @@ button {
         , .overlay-am
         , .controls-am {
             z-index: 2147483647;
+        }
+        .controls-am .fullscreen-am {
+            background-image: image-url('exitfullscreen.svg');
         }
     }
     .poster-am

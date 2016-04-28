@@ -226,17 +226,17 @@
             });
 
             $(video).on('webkitfullscreenchange fullscreenchange', function(){
-                if ($this.hasClass('fullscreen-am')) {
-                    $this.removeClass('fullscreen-am');
+                if ($this.hasClass('fullscreen-mode-am')) {
+                    $this.removeClass('fullscreen-mode-am');
                 } else {
-                    $this.addClass('fullscreen-am');
+                    $this.addClass('fullscreen-mode-am');
                 }
             });
             $(document).on('mozfullscreenchange', function() {
-                if ($this.hasClass('fullscreen-am')) {
-                    $this.removeClass('fullscreen-am');
+                if ($this.hasClass('fullscreen-mode-am')) {
+                    $this.removeClass('fullscreen-mode-am');
                 } else {
-                    $this.addClass('fullscreen-am');
+                    $this.addClass('fullscreen-mode-am');
                 }
             });
 
