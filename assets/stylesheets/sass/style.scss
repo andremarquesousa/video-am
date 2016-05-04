@@ -28,10 +28,9 @@ button {
         height: 100%;
         margin: 0;
 
-        .poster-am
-        , .overlay-am
-        , .controls-am {
-            z-index: 2147483647;
+        .video-container-am {
+            width: 100%;
+            height: 100%;
         }
         .controls-am .fullscreen-am {
             background-image: image-url('exitfullscreen.svg');

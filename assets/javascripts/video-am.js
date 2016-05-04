@@ -203,14 +203,14 @@
 
             button.on('click', function() {
                 if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
-                    if (video.requestFullscreen) {
-                        video.requestFullscreen();
-                    } else if (video.msRequestFullscreen) {
-                        video.msRequestFullscreen();
-                    } else if (video.mozRequestFullScreen) {
-                        video.mozRequestFullScreen();
-                    } else if (video.webkitRequestFullscreen) {
-                        video.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                    if ($this.get(0).requestFullscreen) {
+                        $this.get(0).requestFullscreen();
+                    } else if ($this.get(0).msRequestFullscreen) {
+                        $this.get(0).msRequestFullscreen();
+                    } else if ($this.get(0).mozRequestFullScreen) {
+                        $this.get(0).mozRequestFullScreen();
+                    } else if ($this.get(0).webkitRequestFullscreen) {
+                        $this.get(0).webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
                     }
                 } else {
                     if (document.exitFullscreen) {
@@ -225,7 +225,7 @@
                 }
             });
 
-            $(video).on('webkitfullscreenchange fullscreenchange', function(){
+            $this.on('webkitfullscreenchange fullscreenchange', function(){
                 if ($this.hasClass('fullscreen-mode-am')) {
                     $this.removeClass('fullscreen-mode-am');
                 } else {
